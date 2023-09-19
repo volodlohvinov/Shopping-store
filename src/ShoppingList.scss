@@ -1,0 +1,22 @@
+.field_container {
+background: lightgray;
+border-radius: 50px;
+width: 520px;
+}
+.product_field, .quantiy_field {
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+
+}
+ul {
+    list-style-type: none;
+    
+}
+li {
+    font-size: 20px;
+    width: 250px;
+    display: flex;
+    gap: 30px;
+}

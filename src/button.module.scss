@@ -1,0 +1,10 @@
+.cool-button {
+    background-color: lightcoral;
+    box-sizing: border-box;
+    
+     &:hover {
+         background-color: lightblue;
+         
+     }
+ }
+ 
