@@ -84,6 +84,7 @@ const ShoppingList = () => {
   return (
     <div className='edit'>
       <h1>Shopping List</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
         {items.map((item) => (
           <li key={item.id}>
