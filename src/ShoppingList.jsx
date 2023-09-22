@@ -61,7 +61,7 @@ const ShoppingList = () => {
         if (editMode && editedItemId) {
           if (validateInput(newItem, newItemQuantity)) {
             dispatch(
-              editItem(editedItemId, {
+              editItem( {
                 id: editedItemId,
                 name: newItem,
                 quantity: parseInt(newItemQuantity, 10) || 1,
