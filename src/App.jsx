@@ -1,10 +1,8 @@
 import React from 'react';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { shoppingListReducer } from './reducers/ShoppingListReducer';
-import ShoppingList from './ShoppingList.jsx';
+import store from './store'; 
 
-const store = createStore(shoppingListReducer);
+import ShoppingList from './ShoppingList.jsx';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, editItem, deleteItem } from './actions/ShoppingListAction';
+import { addItem, editItem, deleteItem } from './reducers/ShoppingListReducer';
 import './ShoppingList.scss'
 import { Button } from 'antd';
 import { coolButton } from './button.module.scss'
@@ -10,8 +10,7 @@ import { EditOutlined, DeleteOutlined, } from '@ant-design/icons';
 
 const ShoppingList = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.items);
-
+  const items = useSelector((state) => state.shoppingList.items);
   const [newItem, setNewItem] = useState('');
   const [newItemQuantity, setNewItemQuantity] = useState('');
   const [editMode, setEditMode] = useState(false);
@@ -90,7 +89,7 @@ const ShoppingList = () => {
           <li key={item.id}>
             {item.name} ({item.quantity})
             <DeleteOutlined onClick={() => handleDeleteItem(item.id)}>Delete</DeleteOutlined>
-            <EditOutlined onClick={() => {setNewItem(item.name); setEditMode(true); setEditedItemId(item.id);}}>Edit</EditOutlined>
+            <EditOutlined onClick={() => {setNewItem(item.name); setNewItemQuantity(item.quantity); setEditMode(true); setEditedItemId(item.id); }}>Edit</EditOutlined>
           </li>
         ))}
       </ul>
