@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store'; 
 
-import ShoppingList from './ShoppingList.jsx';
+import ShoppingList from './ShoppingList';
 
 function App() {
   return (

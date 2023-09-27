@@ -8,12 +8,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.jsx',
+    entry: './src/index.tsx',
     output: {
       filename: 'main.js',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
       publicPath: './'
+    },
+    resolve: {
+      extensions: [".jsx", ".js", ".tsx", ".ts"],
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -40,6 +43,11 @@ module.exports = {
                 
               },
             },
+          },
+          {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            exclude: /node_module/,
           },
           {
             test: /\.scss$/,

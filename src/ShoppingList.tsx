@@ -7,24 +7,32 @@ import { coolButton } from './button.module.scss'
 import { EditOutlined, DeleteOutlined, } from '@ant-design/icons';
 
 
+interface Item {
+  id: number;
+  name: string;
+  quantity: number;
+}
+interface RootState {
+  shoppingList: { items: Item[] };
+}
 
-const ShoppingList = () => {
+const ShoppingList: React.FC = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.shoppingList.items);
-  const [newItem, setNewItem] = useState('');
-  const [newItemQuantity, setNewItemQuantity] = useState('');
-  const [editMode, setEditMode] = useState(false);
-  const [editedItemId, setEditedItemId] = useState(null);
-  const [error, setError] = useState('');
+  const items = useSelector((state: RootState) => state.shoppingList.items);
+  const [newItem, setNewItem] = useState<string>('');
+  const [newItemQuantity, setNewItemQuantity] = useState<number | string>('');
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editedItemId, setEditedItemId] = useState<number | null>(null);
+  const [error, setError] = useState<string>('');
 
-  const validateInput = (name, quantity) => {
+  const validateInput = (name: string, quantity:  number | string ): boolean => {
     if (!name.trim()) {
       setError('Product name cannot be empty.');
       return false;
     }
     
 
-    if (isNaN(quantity) || quantity <= 0) {
+    if (isNaN(Number(quantity)) || Number(quantity) <= 0) {
       setError('Quantity must be a positive number.');
       return false;
     }
@@ -35,7 +43,7 @@ const ShoppingList = () => {
 
   const handleAddItem = () => {
 
-    if (!isNaN(newItem) || newItem.trim() === '') {
+    if (!isNaN(Number(newItem)) || newItem.trim() === '') {
         setError('Product name cannot be a number or empty.');
         return;
       }
@@ -43,7 +51,7 @@ const ShoppingList = () => {
         const newItemObject = {
           id: Date.now(),
           name: newItem,
-          quantity: parseInt(newItemQuantity, 10) || 1,
+          quantity: parseInt(String(newItemQuantity), 10) || 1,
         };
         dispatch(addItem(newItemObject));
         setNewItem('');
@@ -53,7 +61,7 @@ const ShoppingList = () => {
     };
 
     const handleEditItem = () => {
-        if (!isNaN(newItem) || newItem.trim() === '') {
+        if (!isNaN(Number(newItem)) || newItem.trim() === '') {
           setError('Product name cannot be a number or empty.');
           return;
         }
@@ -64,7 +72,7 @@ const ShoppingList = () => {
               editItem( {
                 id: editedItemId,
                 name: newItem,
-                quantity: parseInt(newItemQuantity, 10) || 1,
+                quantity: parseInt(String(newItemQuantity), 10) || 1,
               })
             );
             setNewItem('');
@@ -76,7 +84,7 @@ const ShoppingList = () => {
         }
       };
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id: number) => {
     dispatch(deleteItem(id));
   };
 

@@ -1,8 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface Item {
+  id: number;
+  name: string;
+  quantity: number;
+}
+
+interface ShoppingListState {
+  items: Item[];
+}
+
+const initialState: ShoppingListState = {
+  items: [],
+};
+
 const shoppingListSlice = createSlice({
   name: 'shoppingList',
-  initialState: { items: [] },
+  initialState,
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
